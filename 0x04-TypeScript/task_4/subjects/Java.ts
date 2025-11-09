@@ -1,5 +1,5 @@
-import { Subjects } from "./Teacher";
-import { Subject } from "./Subject";
+import { Subjects } from "./Subject";
+import { Subjects as TeacherNS } from "./Teacher";
 
 export namespace Subjects {
   export interface Teacher {
@@ -13,7 +13,8 @@ export namespace Subjects {
 
     getAvailableTeacher(): string {
       if (
-        this.teacher?.experienceTeachingJava &&
+        this.teacher &&
+        this.teacher.experienceTeachingJava &&
         this.teacher.experienceTeachingJava > 0
       ) {
         return `Available Teacher: ${this.teacher.firstName}`;

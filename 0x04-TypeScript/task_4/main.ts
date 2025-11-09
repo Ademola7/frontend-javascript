@@ -1,33 +1,33 @@
-import { Subjects } from "./subjects/Teacher";
-import { Cpp } from "./subjects/Cpp";
-import { Java } from "./subjects/Java";
-import { React } from "./subjects/React";
+import { Subjects } from "./subjects/Cpp";
+import { Subjects as JavaNS } from "./subjects/Java";
+import { Subjects as ReactNS } from "./subjects/React";
+import { Subjects as TeacherNS } from "./subjects/Teacher";
 
-// Create teacher with C experience
-export const cTeacher: Subjects.Teacher = {
+// Create teacher object
+export const cTeacher: TeacherNS.Teacher = {
   firstName: "Guillaume",
   lastName: "Salva",
   experienceTeachingC: 10,
 };
 
-// Create instances for each subject
-export const cpp = new Cpp.Cpp();
-export const java = new Java.Java();
-export const react = new React.React();
+// Create subjects
+export const cpp = new Subjects.Cpp();
+export const java = new JavaNS.Java();
+export const react = new ReactNS.React();
 
-// C++ Subject
+// C++ example
 console.log("C++");
 cpp.setTeacher(cTeacher);
 console.log(cpp.getRequirements());
 console.log(cpp.getAvailableTeacher());
 
-// Java Subject
+// Java example
 console.log("Java");
 java.setTeacher(cTeacher);
 console.log(java.getRequirements());
 console.log(java.getAvailableTeacher());
 
-// React Subject
+// React example
 console.log("React");
 react.setTeacher(cTeacher);
 console.log(react.getRequirements());
