@@ -1,10 +1,8 @@
-import { Subjects } from "./Teacher";
-
-export namespace Subjects {
+namespace Subjects {
   export class Subject {
-    teacher: Teacher | null = null;
+    teacher: Teacher;
 
-    setTeacher(teacher: Teacher) {
+    setTeacher(teacher: Teacher): void {
       this.teacher = teacher;
     }
   }

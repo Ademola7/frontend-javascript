@@ -1,8 +1,7 @@
-import { Subjects } from "./Subject";
-import { Subjects as TeacherNS } from "./Teacher";
+/// <reference path="Teacher.ts" />
+/// <reference path="Subject.ts" />
 
-export namespace Subjects {
-  // Declaration merging: extend Teacher
+namespace Subjects {
   export interface Teacher {
     experienceTeachingC?: number;
   }
@@ -14,13 +13,12 @@ export namespace Subjects {
 
     getAvailableTeacher(): string {
       if (
-        this.teacher &&
-        this.teacher.experienceTeachingC &&
-        this.teacher.experienceTeachingC > 0
+        this.teacher.experienceTeachingC === undefined ||
+        this.teacher.experienceTeachingC === 0
       ) {
-        return `Available Teacher: ${this.teacher.firstName}`;
+        return "No available teacher";
       }
-      return "No available teacher";
+      return `Available Teacher: ${this.teacher.firstName}`;
     }
   }
 }

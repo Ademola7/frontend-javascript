@@ -1,7 +1,7 @@
-import { Subjects } from "./Subject";
-import { Subjects as TeacherNS } from "./Teacher";
+/// <reference path="Teacher.ts" />
+/// <reference path="Subject.ts" />
 
-export namespace Subjects {
+namespace Subjects {
   export interface Teacher {
     experienceTeachingReact?: number;
   }
@@ -13,13 +13,12 @@ export namespace Subjects {
 
     getAvailableTeacher(): string {
       if (
-        this.teacher &&
-        this.teacher.experienceTeachingReact &&
-        this.teacher.experienceTeachingReact > 0
+        this.teacher.experienceTeachingReact === undefined ||
+        this.teacher.experienceTeachingReact === 0
       ) {
-        return `Available Teacher: ${this.teacher.firstName}`;
+        return "No available teacher";
       }
-      return "No available teacher";
+      return `Available Teacher: ${this.teacher.firstName}`;
     }
   }
 }
