@@ -1,22 +1,16 @@
-// ------------------------------
-// Director and Teacher interfaces
-// ------------------------------
-export interface DirectorInterface {
+interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workDirectorTasks(): string;
 }
 
-export interface TeacherInterface {
+interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workTeacherTasks(): string;
 }
 
-// ------------------------------
-// Director class
-// ------------------------------
-export class Director implements DirectorInterface {
+class Director implements DirectorInterface {
   workFromHome(): string {
     return "Working from home";
   }
@@ -30,10 +24,7 @@ export class Director implements DirectorInterface {
   }
 }
 
-// ------------------------------
-// Teacher class
-// ------------------------------
-export class Teacher implements TeacherInterface {
+class Teacher implements TeacherInterface {
   workFromHome(): string {
     return "Cannot work from home";
   }
@@ -47,38 +38,29 @@ export class Teacher implements TeacherInterface {
   }
 }
 
-// ------------------------------
-// createEmployee function
-// ------------------------------
-export function createEmployee(salary: number | string): Director | Teacher {
-  const numericSalary =
-    typeof salary === "string" ? parseInt(salary, 10) : salary;
-  if (numericSalary < 500) {
+function createEmployee(salary: number | string): Director | Teacher {
+  if (typeof salary === "number" && salary < 500) {
     return new Teacher();
   }
   return new Director();
 }
 
-// ------------------------------
-// Type predicate for Director
-// ------------------------------
-export function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
+function isDirector(employee: Director | Teacher): employee is Director {
+  return (employee as Director).workDirectorTasks !== undefined;
 }
 
-// ------------------------------
-// Execute work depending on employee type
-// ------------------------------
-export function executeWork(employee: Director | Teacher): void {
+function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
-    console.log(employee.workDirectorTasks());
+    return employee.workDirectorTasks();
   } else {
-    console.log(employee.workTeacherTasks());
+    return employee.workTeacherTasks();
   }
 }
 
-// ------------------------------
-// Example usage
-// ------------------------------
-executeWork(createEmployee(200)); // Getting to work
-executeWork(createEmployee(1000)); // Getting to director tasks
+// Test cases
+console.log(createEmployee(200));
+console.log(createEmployee(1000));
+console.log(createEmployee("$500"));
+
+console.log(executeWork(createEmployee(200)));
+console.log(executeWork(createEmployee(1000)));
